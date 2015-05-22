@@ -117,22 +117,90 @@ Maszyna& Maszyna::operator=(const Maszyna& m){
 }
 
 std::ostream& operator<<(std::ostream& output, const Maszyna& m){
-	output<< "Maszyna ";
+	output << "Maszyna ";
 
 	switch(m.typMaszyny){
 		case Maszyna::typ::maszynaTypu1:
-
-
+			output << "typu I, ";
 			break;
 		case Maszyna::typ::maszynaTypu2:
-
-
+			output << "typu II, ";
 			break;
 		case Maszyna::typ::maszynaTypu3:
+			output << "typu III, ";
+			break;
+	}
 
-
+	switch(m.statusMaszyny){
+		case Maszyna::status::wolna:
+			output << "wolna";
+			break;
+		case Maszyna::status::obrobkaSzafy:
+			output << "trwa obróbka szaf";
+			break;
+		case Maszyna::status::obrobkaKrzesla:
+			output << "trwa obróbka szaf";
 			break;
 	}
 
 	return output;
+}
+
+void Maszyna::set(Parameter param, unsigned int val){
+	switch(param){
+		case Parameter::czasObrobki:
+			this->CzO = val;
+			break;
+		case Parameter::liczbaMaszyn:
+			Maszyna::lm = val;
+			break;
+		case Parameter::liczbaMaszynTypu1:
+			Maszyna::lm1 = val;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu1:
+			Maszyna::lwm1 = val;
+			break;
+		case Parameter::liczbaMaszynTypu2:
+			Maszyna::lm2 = val;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu2:
+			Maszyna::lwm2 = val;
+			break;
+		case Parameter::liczbaMaszynTypu3:
+			Maszyna::lm3 = val;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu3:
+			Maszyna::lwm3 = val;
+			break;
+	}
+}
+
+unsigned int Maszyna::get(Parameter param){
+	switch(param){
+		case Parameter::czasObrobki:
+			return this->CzO;
+			break;
+		case Parameter::liczbaMaszyn:
+			return Maszyna::lm;
+			break;
+		case Parameter::liczbaMaszynTypu1:
+			return Maszyna::lm1;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu1:
+			return Maszyna::lwm1;
+			break;
+		case Parameter::liczbaMaszynTypu2:
+			return Maszyna::lm2;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu2:
+			return Maszyna::lwm2;
+			break;
+		case Parameter::liczbaMaszynTypu3:
+			return Maszyna::lm3;
+			break;
+		case Parameter::liczbaWolnychMaszynTypu3:
+			return Maszyna::lwm3;
+		default:
+			return 0;
+	}
 }

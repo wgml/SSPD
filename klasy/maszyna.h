@@ -28,9 +28,16 @@ class Maszyna{
 		Maszyna& operator=(const Maszyna&);
 		friend std::ostream& operator<<(std::ostream&, const Maszyna&);
 
-
 		//dla W
 		enum class Parameter{
+			czasObrobki,
+			liczbaMaszyn,
+			liczbaMaszynTypu1,
+			liczbaWolnychMaszynTypu1,
+			liczbaMaszynTypu2,
+			liczbaWolnychMaszynTypu2,
+			liczbaMaszynTypu3,
+			liczbaWolnychMaszynTypu3,
 
 		};
 		void set(Parameter, unsigned int);
