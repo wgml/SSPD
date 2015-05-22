@@ -30,10 +30,7 @@ Koordynator::Koordynator(unsigned int lP, unsigned int lMI, unsigned int lMII, u
 }
 
 //nagłówki rozpatrywane przez koordynatora
-void Koordynator::koniecWyjsciaZlecenia(){
 
-
-}
 
 void Koordynator::poczatekWyjsciaZlecenia(){
 	std::list<Zlecenie> temp;
@@ -50,6 +47,20 @@ void Koordynator::poczatekWyjsciaZlecenia(){
 	auto p = std::find(this->zlecenia.begin(), this->zlecenia.end(), zrobione);
 
 	p->set(Zlecenie::Parameter::czasWyjsciaZlecenia, this->czasSymulacji);
+
+}
+
+void Koordynator::koniecWyjsciaZlecenia(){
+	auto it = std::find_if(this->zlecenia.begin(), this->zlecenia.end(), [&](Zlecenie z){
+		return z.get(Zlecenie::Parameter::czasWyjsciaZlecenia) == this->czasSymulacji;
+	});
+
+	if(it != this->zlecenia.end()){
+		Koordynator::LSzM = Koordynator::LSzM - it->get(Zlecenie::Parameter::zapotrzebowanieNaSzsafy);
+		Koordynator::LKM = Koordynator::LKM - it->get(Zlecenie::Parameter::zapotrzebowanieNaKrzesla);
+		this->zlecenia.remove(*it);
+		Koordynator::i++;
+	}
 
 }
 
@@ -105,8 +116,9 @@ void Koordynator::symuluj(unsigned int n){
 	for(unsigned i=0; i<n; i++){
 		this->czasSymulacji++;
 
-		this->koniecWyjsciaZlecenia();
 		this->poczatekWyjsciaZlecenia();
+		this->koniecWyjsciaZlecenia();
+
 		this->koniecObrobkiMaszynaIII();
 		this->poczatekObrobkiMaszynaIII();
 		this->koniecObrobkiSzafMaszynaII();
