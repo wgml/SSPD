@@ -17,6 +17,8 @@ class Zlecenie{
 		~Zlecenie();
 		Zlecenie& operator=(const Zlecenie &);
 		friend std::ostream& operator<<(std::ostream&, const Zlecenie&);
+		bool operator<(const Zlecenie&);
+		bool operator==(const Zlecenie&);
 
 		//dla W
 		enum class Parameter{

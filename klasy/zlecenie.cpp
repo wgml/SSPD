@@ -34,6 +34,14 @@ Zlecenie& Zlecenie::operator=(const Zlecenie & z){
 	return *this;
 }
 
+bool Zlecenie::operator<(const Zlecenie& z){
+	return this->Nr < z.Nr;
+}
+
+bool Zlecenie::operator==(const Zlecenie& z){
+	return this->Nr == z.Nr;
+}
+
 std::ostream& operator<<(std::ostream& output, const Zlecenie& z){
 	output << "Zlecenie nr=" << z.Nr << " parametry=" << z.CzP << " " << z.CzW << " " << z.ZAKs << " " << z.ZAK;
 	return output;
