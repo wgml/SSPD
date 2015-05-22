@@ -8,6 +8,10 @@
 
 #include "pracownik.h"
 
+unsigned int Pracownik::id = 1;
+unsigned int Pracownik::lp = 0;
+unsigned int Pracownik::lwp = 0;
+
 Pracownik::Pracownik(): idP(Pracownik::id), czo1(0), czo2(0), czo3(0), status(statusPracownika::wolny){
 	Pracownik::id++;
 	Pracownik::lp++;
