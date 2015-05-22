@@ -38,7 +38,6 @@ class Maszyna{
 			liczbaWolnychMaszynTypu2,
 			liczbaMaszynTypu3,
 			liczbaWolnychMaszynTypu3,
-
 		};
 		void set(Parameter, unsigned int);
 		unsigned int get(Parameter);
