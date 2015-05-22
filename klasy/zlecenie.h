@@ -16,7 +16,7 @@ class Zlecenie{
 		Zlecenie(const Zlecenie&);
 		~Zlecenie();
 		Zlecenie& operator=(const Zlecenie &);
-		friend std::ostream& operator<<(std::ostream, const Zlecenie&);
+		friend std::ostream& operator<<(std::ostream&, const Zlecenie&);
 
 		//dla W
 		enum class Parameter{
@@ -24,8 +24,9 @@ class Zlecenie{
 			czasPrzybyciaZlecenia,
 			czasWyjsciaZlecenia,
 			zapotrzebowanieNaSzsafy,
-			zapotrzebowanieNaKrzesła
+			zapotrzebowanieNaKrzesla
 		};
+
 		void set(Parameter, unsigned int);
 		unsigned int get(Parameter);
 

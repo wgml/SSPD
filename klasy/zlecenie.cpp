@@ -5,7 +5,8 @@
  *      Author: rafal
  */
 
-#include <iostream>
+
+#include "zlecenie.h"
 
 unsigned int Zlecenie::id = 1;
 unsigned int Zlecenie::lz = 0;
@@ -33,13 +34,13 @@ Zlecenie& Zlecenie::operator=(const Zlecenie & z){
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream output, const Zlecenie& z){
+std::ostream& operator<<(std::ostream& output, const Zlecenie& z){
 	output << "Zlecenie nr=" << z.Nr << " parametry=" << z.CzP << " " << z.CzW << " " << z.ZAKs << " " << z.ZAK;
 	return output;
 }
 
 void Zlecenie::set(Parameter param, unsigned int val){
-	switch(Parameter){
+	switch(param){
 		case Parameter::nrZlecenia:
 			this->Nr = val;
 			break;
@@ -56,14 +57,14 @@ void Zlecenie::set(Parameter param, unsigned int val){
 			this->ZAKs = val;
 			break;
 
-		case Parameter::zapotrzebowanieNaKrzesła:
+		case Parameter::zapotrzebowanieNaKrzesla:
 			this->ZAK = val;
 			break;
 	}
 }
 
-unsigned int Zlecenie::get(Parameter){
-	switch(Parameter){
+unsigned int Zlecenie::get(Parameter param){
+	switch(param){
 		case Parameter::nrZlecenia:
 			return this->Nr;
 			break;
@@ -80,7 +81,7 @@ unsigned int Zlecenie::get(Parameter){
 			return this->ZAKs;
 			break;
 
-		case Parameter::zapotrzebowanieNaKrzesła:
+		case Parameter::zapotrzebowanieNaKrzesla:
 			return this->ZAK;
 			break;
 
