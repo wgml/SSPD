@@ -45,8 +45,7 @@ void Koordynator::poczatekWyjsciaZlecenia(){
 	Zlecenie zrobione = *std::min_element(temp.begin(), temp.end());
 
 	auto p = std::find(this->zlecenia.begin(), this->zlecenia.end(), zrobione);
-
-	p->set(Zlecenie::Parameter::czasWyjsciaZlecenia, this->czasSymulacji);
+	if( p != this->zlecenia.end()) p->set(Zlecenie::Parameter::czasWyjsciaZlecenia, this->czasSymulacji);
 
 }
 
