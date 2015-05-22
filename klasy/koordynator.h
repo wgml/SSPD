@@ -23,7 +23,25 @@
  * */
 class Koordynator{
 	public:
-		Koordynator(unsigned int, unsigned int, unsigned int);
+		Koordynator(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+
+		void symuluj(unsigned int);
+
+		//nagłówki rozpatrywane przez koordynatora
+		void koniecWyjsciaZlecenia();
+		void poczatekWyjsciaZlecenia();
+		void koniecObrobkiMaszynaIII();
+		void poczatekObrobkiMaszynaIII();
+		void koniecObrobkiSzafMaszynaII();
+		void poczatekObrobkiSzafMaszynaII();
+		void koniecObrobkiSzafMaszynaI();
+		void poczatekObrobkiSzafMaszynaI();
+		void koniecObrobkiKrzeselMaszynaII();
+		void poczatekObrobkiKrzeselMaszynaII();
+		void koniecObrobkiKrzeselMaszynaI();
+		void poczatekObrobkiKrzeselMaszynaI();
+		void poczatekRealizacji();
+		void przybycieZlecenia();
 
 		//dla W
 		enum class Parameter{
@@ -32,6 +50,7 @@ class Koordynator{
 
 		void set(Parameter, unsigned int);
 		unsigned int set(Parameter);
+
 
 	private:
 		//"globalne zmienne stanu"
