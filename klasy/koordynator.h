@@ -60,7 +60,7 @@ class Koordynator{
 		void sim(unsigned n);
 
 		void set(Parameter, unsigned);
-		unsigned int set(Parameter);
+		unsigned get(Parameter);
 
 	private:
 		//nagłówki rozpatrywane przez koordynatora

@@ -221,3 +221,73 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 	}
 }
 
+void Koordynator::set(Parameter param, unsigned val){
+	switch(param){
+		case Parameter::PrSz:
+			this->PrSz1 = val;
+			break;
+		case Parameter::PrSz2:
+			this->PrSz2 = val;
+			break;
+		case Parameter::PrK:
+			this->PrK = val;
+			break;
+		case Parameter::LSzM:
+			this->LSzM = val;
+			break;
+		case Parameter::LKM:
+			this->LKM = val;
+			break;
+		case Parameter::KSz:
+			this->KSz = val;
+			break;
+		case Parameter::KK:
+			this->KK = val;
+			break;
+		case Parameter::i:
+			this->i = val;
+			break;
+		case Parameter::j:
+			this->j = val;
+			break;
+		case Parameter::LWP:
+			this->LWP = val;
+			break;
+		case Parameter::ZASz:
+			this->ZASz = val;
+			break;
+		case Parameter::ZAK:
+			this->ZAK = val;
+			break;
+		case Parameter::LWM1:
+			this->LWM1 = val;
+			break;
+		case Parameter::LWM2:
+			this->LWM2 = val;
+			break;
+		case Parameter::LWM3:
+			this->LWM3 = val;
+			break;
+		case Parameter::lPracownikow:
+			this->LP = val;
+			break;
+		case Parameter::lMaszyn1:
+			this->LM1 = val;
+			break;
+		case Parameter::lMaszyn2:
+			this->LM2 = val;
+			break;
+		case Parameter::lMaszyn3:
+			this->LM3 = val;
+			break;
+		case Parameter::aktualnyCzas:
+			this->aktualnyCzas = val;
+			break;
+}
+
+unsigned Koordynator::get(Parameter){
+
+}*/
+
+
+
