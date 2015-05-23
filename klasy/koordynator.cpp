@@ -112,6 +112,7 @@ void Koordynator::poczatekWyjsciaZlecenia(){
 	if(it != this->zleceniaOczekujace.end()){
 		Koordynator::LSzM -= it->zapotrzebowanieSzafy();
 		Koordynator::LKM  -= it->zapotrzebowanieKrzesla();
+		this->zleceniaZrealizowane.push_back(*it);
 		this->zleceniaOczekujace.remove(*it);
 		Koordynator::i++;
 	}
