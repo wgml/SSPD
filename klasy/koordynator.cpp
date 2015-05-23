@@ -221,7 +221,6 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 	if((this->LWP > 0) && (this->LWM1 > 0) && (this->KK > 0) && (this->KSz == 0)){
 		this->LWP--;
 		this->LWM2--;
-		this->PrK--;
 		this->krzeslaKoniecM1.push_back(this->aktualnyCzas + this->czasObrobkiKrzeslaMaszyna1);
 	}
 }
