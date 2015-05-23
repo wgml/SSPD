@@ -283,11 +283,73 @@ void Koordynator::set(Parameter param, unsigned val){
 		case Parameter::aktualnyCzas:
 			this->aktualnyCzas = val;
 			break;
+	}
 }
 
-unsigned Koordynator::get(Parameter){
-
-}*/
+unsigned Koordynator::get(Parameter param){
+	switch(param){
+		case Parameter::PrSz:
+			return this->PrSz1;
+			break;
+		case Parameter::PrSz2:
+			return this->PrSz2;
+			break;
+		case Parameter::PrK:
+			return this->PrK;
+			break;
+		case Parameter::LSzM:
+			return this->LSzM;
+			break;
+		case Parameter::LKM:
+			return this->LKM;
+			break;
+		case Parameter::KSz:
+			return this->KSz;
+			break;
+		case Parameter::KK:
+			return this->KK;
+			break;
+		case Parameter::i:
+			return this->i;
+			break;
+		case Parameter::j:
+			return this->j;
+			break;
+		case Parameter::LWP:
+			return this->LWP;
+			break;
+		case Parameter::ZASz:
+			return this->ZASz;
+			break;
+		case Parameter::ZAK:
+			return this->ZAK;
+			break;
+		case Parameter::LWM1:
+			return this->LWM1;
+			break;
+		case Parameter::LWM2:
+			return this->LWM2;
+			break;
+		case Parameter::LWM3:
+			return this->LWM3;
+			break;
+		case Parameter::lPracownikow:
+			return this->LP;
+			break;
+		case Parameter::lMaszyn1:
+			return this->LM1;
+			break;
+		case Parameter::lMaszyn2:
+			return this->LM2;
+			break;
+		case Parameter::lMaszyn3:
+			return this->LM3;
+			break;
+		case Parameter::aktualnyCzas:
+			return this->aktualnyCzas;
+			break;
+	}
+}
 
 
 
