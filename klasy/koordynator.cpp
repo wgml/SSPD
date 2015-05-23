@@ -48,7 +48,7 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 	std::uniform_int_distribution<unsigned> genKrzesel(this->krzeslaD, this->krzeslaG);
 	std::uniform_int_distribution<unsigned> genSzaf(this->szafyD, this->szafyG);
 
-	while(this->aktualnyCzas > this->dlugoscSymulacji){
+	while(this->aktualnyCzas >= this->dlugoscSymulacji){
 		unsigned nowyCzas 	 = genCzasu(generator);
 		unsigned noweKrzesla = genKrzesel(generator);
 		unsigned noweSzafy	 = genSzaf(generator);
@@ -65,6 +65,22 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 
 void Koordynator::sim(unsigned n){
 	for(unsigned i=0; i<n; i++){
+		this->aktualnyCzas++;
+
+		this->poczatekWyjsciaZlecenia();		//tutaj została zamieniona kolejność #Artur!!
+		this->koniecWyjsciaZlecenia();
+		this->koniecObrobkiMaszynaIII();
+		this->poczatekObrobkiMaszynaIII();
+		this->koniecObrobkiSzafMaszynaII();
+		this->poczatekObrobkiSzafMaszynaII();
+		this->koniecObrobkiSzafMaszynaI();
+		this->poczatekObrobkiSzafMaszynaI();
+		this->koniecObrobkiKrzeselMaszynaII();
+		this->poczatekObrobkiKrzeselMaszynaII();
+		this->koniecObrobkiKrzeselMaszynaI();
+		this->poczatekObrobkiKrzeselMaszynaI();
+		this->poczatekRealizacji();
+		this->przybycieZlecenia();
 
 		if(this->aktualnyCzas >= this->dlugoscSymulacji) break;
 	}
@@ -72,18 +88,47 @@ void Koordynator::sim(unsigned n){
 
 //nagłówki rozpatrywane przez koordynatora
 void Koordynator::koniecWyjsciaZlecenia(){
-	//todo
+	std::list<Zlecenie> temp;
+
+	//weź zrealizowane zlecenia
+	std::copy_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(), temp.begin(), [](Zlecenie z){
+		return (Koordynator::LSzM >= z.zapotrzebowanieSzafy()) && (Koordynator::LKM >= z.zapotrzebowanieKrzesla());});
+
+	if(!temp.empty()){
+		//znajdź zlecenie o najmniejszym id
+		Zlecenie zrobione = *std::min_element(temp.begin(), temp.end());
+		auto p = std::find(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(), zrobione);
+		if( p != this->zleceniaOczekujace.end()) p->czasWyjscia(this->aktualnyCzas);
+	}
+
 }
 
 void Koordynator::poczatekWyjsciaZlecenia(){
-	//todo
+	auto it = std::find_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(),
+	[&](Zlecenie z){
+		return z.czasWyjscia() == this->aktualnyCzas;
+	});
+
+	if(it != this->zleceniaOczekujace.end()){
+		Koordynator::LSzM -= it->zapotrzebowanieSzafy();
+		Koordynator::LKM  -= it->zapotrzebowanieKrzesla();
+		this->zleceniaOczekujace.remove(*it);
+		Koordynator::i++;
+	}
 }
 void Koordynator::poczatekRealizacji(){
-	//todo
+	//todo w przybycieZlecenia jest to zrobione
 }
 
 void Koordynator::przybycieZlecenia(){
-	//todo
+	//sprawdzam początek listy
+	if((this->zleceniaPrzybywajace.front()).czasPrzybycia() == this->aktualnyCzas){
+		this->j += 1;
+		this->zleceniaOczekujace.push_back(this->zleceniaPrzybywajace.front());
+		this->KK  += (this->zleceniaPrzybywajace.front()).zapotrzebowanieKrzesla();
+		this->KSz += (this->zleceniaPrzybywajace.front()).zapotrzebowanieSzafy();
+		this->zleceniaPrzybywajace.pop_front();
+	}
 }
 
 void Koordynator::poczatekObrobkiMaszynaIII(){
@@ -176,75 +221,3 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 	}
 }
 
-
-
-/*
-
-
-void Koordynator::poczatekWyjsciaZlecenia(){
-	std::list<Zlecenie> temp;
-
-	//weź zrealizowane zlecenia
-	std::copy_if(this->zlecenia.begin(), this->zlecenia.end(), temp.begin(), [](Zlecenie z){
-		return (Koordynator::LSzM >= z.get(Zlecenie::Parameter::zapotrzebowanieNaSzsafy)) &&
-				(Koordynator::LKM >= z.get(Zlecenie::Parameter::zapotrzebowanieNaKrzesla));
-	});
-
-	//znajdź zlecenie o najmniejszym id
-	Zlecenie zrobione = *std::min_element(temp.begin(), temp.end());
-
-	auto p = std::find(this->zlecenia.begin(), this->zlecenia.end(), zrobione);
-	if( p != this->zlecenia.end()) p->set(Zlecenie::Parameter::czasWyjsciaZlecenia, this->czasSymulacji);
-
-}
-
-void Koordynator::koniecWyjsciaZlecenia(){
-	auto it = std::find_if(this->zlecenia.begin(), this->zlecenia.end(), [&](Zlecenie z){
-		return z.get(Zlecenie::Parameter::czasWyjsciaZlecenia) == this->czasSymulacji;
-	});
-
-	if(it != this->zlecenia.end()){
-		Koordynator::LSzM = Koordynator::LSzM - it->get(Zlecenie::Parameter::zapotrzebowanieNaSzsafy);
-		Koordynator::LKM = Koordynator::LKM - it->get(Zlecenie::Parameter::zapotrzebowanieNaKrzesla);
-		this->zlecenia.remove(*it);
-		Koordynator::i++;
-	}
-
-}
-
-void Koordynator::koniecObrobkiMaszynaIII(){
-	unsigned int LWP = (this->pracownicy[0]).get(Pracownik::Parameter::liczbaWolnychPracownikow);
-	unsigned int LWM3 = (this->maszyny[0].get(Maszyna::Parameter::liczbaWolnychMaszynTypu3));
-
-	if((LWP > 0) && (LWM3 > 0) && (Koordynator::Pr2Sz > 0)){
-		// todo trzeba dodać metody dla maszyn i pracowników aby mogli iśc pracować
-		Koordynator::Pr2Sz--;
-	}
-}
-
-
-
-void Koordynator::symuluj(unsigned int n){
-	for(unsigned i=0; i<n; i++){
-		this->czasSymulacji++;
-
-		this->poczatekWyjsciaZlecenia();		//todo tutaj została zamieniona kolejność #Artur!!
-		this->koniecWyjsciaZlecenia();
-
-		this->koniecObrobkiMaszynaIII();
-		this->poczatekObrobkiMaszynaIII();
-		this->koniecObrobkiSzafMaszynaII();
-		this->poczatekObrobkiSzafMaszynaII();
-		this->koniecObrobkiSzafMaszynaI();
-		this->poczatekObrobkiSzafMaszynaI();
-		this->koniecObrobkiKrzeselMaszynaII();
-		this->poczatekObrobkiKrzeselMaszynaII();
-		this->koniecObrobkiKrzeselMaszynaI();
-		this->poczatekObrobkiKrzeselMaszynaI();
-		this->poczatekRealizacji();
-		this->przybycieZlecenia();
-
-		if(this->czasSymulacji == this->dlugoscSymulacji) break;
-	}
-
-*/
