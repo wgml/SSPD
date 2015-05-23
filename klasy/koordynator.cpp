@@ -130,6 +130,8 @@ void Koordynator::przybycieZlecenia(){
 		this->zleceniaOczekujace.push_back(this->zleceniaPrzybywajace.front());
 		this->KK  += (this->zleceniaPrzybywajace.front()).zapotrzebowanieKrzesla();
 		this->KSz += (this->zleceniaPrzybywajace.front()).zapotrzebowanieSzafy();
+		this->ZAK += (this->zleceniaPrzybywajace.front()).zapotrzebowanieKrzesla();
+		this->ZASz+= (this->zleceniaPrzybywajace.front()).zapotrzebowanieSzafy();
 		this->zleceniaPrzybywajace.pop_front();
 	}
 }
@@ -171,7 +173,7 @@ void Koordynator::koniecObrobkiSzafMaszynaII(){
 }
 
 void Koordynator::koniecObrobkiSzafMaszynaI(){
-	if(this->szafyKoniecM2.front() == this->aktualnyCzas){
+	if(this->szafyKoniecM1.front() == this->aktualnyCzas){
 		this->LWP++;
 		this->LWM2++;
 		this->PrSz2++;
@@ -358,25 +360,24 @@ unsigned Koordynator::get(Parameter param){
 }
 
 std::ostream& operator<<(std::ostream &output, const Koordynator& koor){
-	output << " Liczba przetworzonych na maszynie I szaf " << koor.PrSz1 << std::endl;
-	output << " Liczba przetworzonych na maszynie II szaf " << koor.PrSz2 << std::endl;
+	output << " Liczba przetworzonych szaf na maszynie I i II  " << koor.PrSz1 << " " << koor.PrSz2 << std::endl;
 	output << " Liczba przetworzonych na maszynie I krzeseł " << koor.PrK << std::endl;
-	output << " Liczba Szaf w magazynie (gotowych) " << koor.LSzM << std::endl;
-	output << " Liczba krzeseł w magazynie (gotowych) " << koor.LKM << std::endl;
-	output << " Liczba szaf czekających w kolejce na rozpoczęcie obróbki " << koor.KSz << std::endl;
-	output << " Liczba krzeseł oczekujących w kolejce na rozpoczęcie obróbki " << koor.KK << std::endl;
+	output << " Liczba szaf i krzesełw magazynie (gotowych) " << koor.LSzM << " " <<  koor.LKM << std::endl;
+	output << " Liczba szaf i krzeseł czekających w kolejce na obróbke " << koor.KSz << " " << koor.KK << std::endl;
 	output << " Liczba zrealizowanych zamówień " << koor.i << std::endl;
 	output << " Liczba zamówień, które przybyły do systemu " << koor.j << std::endl;
-	output << " Liczba wolnych pracowników " << koor.LWP << std::endl;
+	output << " Liczba wolnych pracow    " << koor.LWP << std::endl;
 	output << " Zapotrzebowanie na szafy " << koor.ZASz << std::endl;
-	output << " Zapotrzebowanie na krzesła " << koor.ZAK << std::endl;
-	output << " Liczba wolnych maszyn I " << koor.LWM1 << std::endl;
-	output << " Liczba wolnych maszyn II " << koor.LWM2 << std::endl;
+	output << " Zapotrzebowanie na krzes " << koor.ZAK << std::endl;
+	output << " Liczba wolnych maszyn I   " << koor.LWM1 << std::endl;
+	output << " Liczba wolnych maszyn II  " << koor.LWM2 << std::endl;
 	output << " Liczba wolnych maszyn III " << koor.LWM3 << std::endl;
+	/*
 	output << " Liczba pracowników" << koor.LP << std::endl;
 	output << " Liczba maszyn 1 " << koor.LM1 << std::endl;
 	output << " Liczba maszyn 2 " << koor.LM2 << std::endl;
 	output << " Liczba maszyn 3 " << koor.LM3 << std::endl;
+	*/
 	output << " Czas " << koor.aktualnyCzas << std::endl;
 	return output;
 }
