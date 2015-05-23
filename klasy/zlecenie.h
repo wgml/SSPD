@@ -13,6 +13,7 @@
 class Zlecenie{
 	public:
 		Zlecenie();
+		Zlecenie(unsigned krzesla, unsigned szafy, unsigned przybycie, unsigned wyjscie=0);
 		Zlecenie(const Zlecenie&);
 		~Zlecenie();
 		Zlecenie& operator=(const Zlecenie &);
@@ -20,28 +21,29 @@ class Zlecenie{
 		bool operator<(const Zlecenie&);
 		bool operator==(const Zlecenie&);
 
-		//dla W
-		enum class Parameter{
-			nrZlecenia,
-			czasPrzybyciaZlecenia,
-			czasWyjsciaZlecenia,
-			zapotrzebowanieNaSzsafy,
-			zapotrzebowanieNaKrzesla
-		};
+		//settery
+		void nrZlecenia(unsigned);
+		void czasWyjscia(unsigned);
+		void czasPrzybycia(unsigned);
+		void zapotrzebowanieKrzesla(unsigned);
+		void zapotrzebowanieSzafy(unsigned);
 
-		void set(Parameter, unsigned int);
-		unsigned int get(Parameter);
+		//gettery
+		unsigned nrZlecenia();
+		unsigned czasWyjscia();
+		unsigned czasPrzybycia();
+		unsigned zapotrzebowanieKrzesla();
+		unsigned zapotrzebowanieSzafy();
 
 	private:
-		static unsigned int id;		//numery identyfikacyjne zleceń
-		static unsigned int lz;		//liczba zleceń
+		static unsigned id;		//numery identyfikacyjne zleceń
 
 		//parametery
-		unsigned int Nr;	//numer danego zamówienia(priorytet)
-		unsigned int CzP;	//czas przybycia zlecenia
-		unsigned int CzW;	//czas wyjscia zlecenia z systemu
-		unsigned int ZAKs;	//zapotrzebowanie na szafy
-		unsigned int ZAK;	//zapotrzebowanie na kaszesła
+		unsigned Nr;	//numer danego zamówienia(priorytet)
+		unsigned CzP;	//czas przybycia zlecenia
+		unsigned CzW;	//czas wyjscia zlecenia z systemu
+		unsigned ZAKs;	//zapotrzebowanie na szafy
+		unsigned ZAK;	//zapotrzebowanie na kaszesła
 
 };
 

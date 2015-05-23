@@ -16,6 +16,12 @@ Zlecenie::Zlecenie():Nr(Zlecenie::id), CzP(0), CzW(0), ZAKs(0), ZAK(0){
 	Zlecenie::lz++;
 }
 
+Zlecenie::Zlecenie(unsigned krzesla, unsigned szafy, unsigned przybycie, unsigned wyjscie=0):
+	Nr(Zlecenie::id), CzP(przybycie), CzW(wyjscie), ZAK(krzesla),  ZAKs(szafy){
+	Zlecenie::id++;
+	Zlecenie::lz++;
+}
+
 Zlecenie::Zlecenie(const Zlecenie& z):Nr(z.Nr), CzP(z.CzP), CzW(z.CzW), ZAKs(z.ZAKs), ZAK(z.ZAK){
 	Zlecenie::lz++;
 }
@@ -47,54 +53,42 @@ std::ostream& operator<<(std::ostream& output, const Zlecenie& z){
 	return output;
 }
 
-void Zlecenie::set(Parameter param, unsigned int val){
-	switch(param){
-		case Parameter::nrZlecenia:
-			this->Nr = val;
-			break;
-
-		case Parameter::czasPrzybyciaZlecenia:
-			this->CzP = val;
-			break;
-
-		case Parameter::czasWyjsciaZlecenia:
-			this->CzW = val;
-			break;
-
-		case Parameter::zapotrzebowanieNaSzsafy:
-			this->ZAKs = val;
-			break;
-
-		case Parameter::zapotrzebowanieNaKrzesla:
-			this->ZAK = val;
-			break;
-	}
+void Zlecenie::nrZlecenia(unsigned v){
+	this->Nr = v;
 }
 
-unsigned int Zlecenie::get(Parameter param){
-	switch(param){
-		case Parameter::nrZlecenia:
-			return this->Nr;
-			break;
+void Zlecenie::czasWyjscia(unsigned v){
+	this->CzW = v;
+}
 
-		case Parameter::czasPrzybyciaZlecenia:
-			return this->CzP;
-			break;
+void Zlecenie::czasPrzybycia(unsigned v){
+	this->CzP = v;
+}
 
-		case Parameter::czasWyjsciaZlecenia:
-			return this->CzW;
-			break;
+void Zlecenie::zapotrzebowanieKrzesla(unsigned v){
+	this->ZAK = v;
+}
 
-		case Parameter::zapotrzebowanieNaSzsafy:
-			return this->ZAKs;
-			break;
+void Zlecenie::zapotrzebowanieSzafy(unsigned v){
+	this->ZAKs = v;
+}
 
-		case Parameter::zapotrzebowanieNaKrzesla:
-			return this->ZAK;
-			break;
+unsigned Zlecenie::nrZlecenia(){
+	return this->Nr;
+}
 
-		default:
-			return 0;
-			break;
-	}
+unsigned Zlecenie::czasWyjscia(){
+	return this->CzW;
+}
+
+unsigned Zlecenie::czasPrzybycia(){
+	return this->CzP;
+}
+
+unsigned Zlecenie::zapotrzebowanieKrzesla(){
+	return this->ZAK;
+}
+
+unsigned Zlecenie::zapotrzebowanieSzafy(){
+	return this->ZAKs;
 }
