@@ -175,8 +175,8 @@ void Koordynator::koniecObrobkiSzafMaszynaII(){
 void Koordynator::koniecObrobkiSzafMaszynaI(){
 	if(this->szafyKoniecM1.front() == this->aktualnyCzas){
 		this->LWP++;
-		this->LWM2++;
-		this->PrSz2++;
+		this->LWM1++;
+		this->PrSz1++;
 		this->szafyKoniecM1.pop_front();
 	}
 }
