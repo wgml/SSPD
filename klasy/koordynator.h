@@ -12,8 +12,6 @@
 #include <vector>
 #include <list>
 
-#include "maszyna.h"
-#include "pracownik.h"
 #include "zlecenie.h"
 
 enum class Parameter{
