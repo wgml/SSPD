@@ -115,9 +115,16 @@ class Koordynator{
 		const unsigned czasObrobkiKrzeslaMaszyna2 = 10;
 		const unsigned czasObrobkiKrzeslaMaszyna1 = 20;
 
-//		std::vector<Pracownik> pracownicy;
-//		std::vector<Maszyna> maszyny;
+		//zakresy dla generatora
+		const unsigned czasD = 10;
+		const unsigned czasG = 45;
+		const unsigned krzeslaD = 0;
+		const unsigned krzeslaG = 10;
+		const unsigned szafyD = 0;
+		const unsigned szafyG = 5;
 
+		//listy ze zleceniami
+		std::list<Zlecenie> zleceniaPrzybywajace;
 		std::list<Zlecenie> zleceniaOczekujace;
 		std::list<Zlecenie> zleceniaZrealizowane;
 
@@ -126,7 +133,7 @@ class Koordynator{
 		std::list<unsigned> szafyKoniecM2;
 		std::list<unsigned> szafyKoniecM1;
 
-		//czasy końca obróbki krzeseł na maszynasz
+		//czasy końca obróbki krzeseł na maszynach
 		std::list<unsigned> krzeslaKoniecM2;
 		std::list<unsigned> krzeslaKoniecM1;
 

@@ -7,6 +7,7 @@
 
 #include "koordynator.h"
 #include <algorithm>
+#include <random>
 
 Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, unsigned int dlSym){
 
@@ -41,20 +42,47 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 	std::list<unsigned> szafyKoniecM2 = std::list<unsigned>();
 	std::list<unsigned> szafyKoniecM1 = std::list<unsigned>();
 
+	//losowanie czasów nowych zleceń
+	std::default_random_engine generator;
+	std::uniform_int_distribution<unsigned> genCzasu(this->czasD, this->czasG);
+	std::uniform_int_distribution<unsigned> genKrzesel(this->krzeslaD, this->krzeslaG);
+	std::uniform_int_distribution<unsigned> genSzaf(this->szafyD, this->szafyG);
+
+	while(this->aktualnyCzas > this->dlugoscSymulacji){
+		unsigned nowyCzas 	 = genCzasu(generator);
+		unsigned noweKrzesla = genKrzesel(generator);
+		unsigned noweSzafy	 = genSzaf(generator);
+
+		this->aktualnyCzas += nowyCzas;
+
+		Zlecenie noweZlecenie = Zlecenie(noweKrzesla, noweSzafy, this->aktualnyCzas);
+
+		this->zleceniaPrzybywajace.push_back(noweZlecenie);
+	}
+
+	this->aktualnyCzas = 0;
 }
 
 void Koordynator::sim(unsigned n){
 	for(unsigned i=0; i<n; i++){
 
-		if(this->aktualnyCzas == this->aktualnyCzas) break;
+		if(this->aktualnyCzas >= this->dlugoscSymulacji) break;
 	}
 }
 
+//nagłówki rozpatrywane przez koordynatora
 void Koordynator::koniecWyjsciaZlecenia(){
 	//todo
 }
 
 void Koordynator::poczatekWyjsciaZlecenia(){
+	//todo
+}
+void Koordynator::poczatekRealizacji(){
+	//todo
+}
+
+void Koordynator::przybycieZlecenia(){
 	//todo
 }
 
@@ -126,30 +154,31 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaII(){
 		this->LWP--;
 		this->LWM2--;
 		this->PrK--;
-		this->szafyKoniecM2.push_back(this->aktualnyCzas + this->czasObrobkiSzafyMaszyna2);
+		this->krzeslaKoniecM2.push_back(this->aktualnyCzas + this->czasObrobkiKrzeslaMaszyna2);
 	}
 }
 
 void Koordynator::koniecObrobkiKrzeselMaszynaI(){
-
+	if(this->krzeslaKoniecM1.front() == this->aktualnyCzas){
+		this->LWP++;
+		this->LWM1++;
+		this->PrK++;
+		this->krzeslaKoniecM1.pop_front();
+	}
 }
 
 void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
-
+	if((this->LWP > 0) && (this->LWM1 > 0) && (this->KK > 0) && (this->KSz == 0)){
+		this->LWP--;
+		this->LWM2--;
+		this->PrK--;
+		this->krzeslaKoniecM1.push_back(this->aktualnyCzas + this->czasObrobkiKrzeslaMaszyna1);
+	}
 }
+
+
 
 /*
-Koordynator::Koordynator(unsigned int lP, unsigned int lMI, unsigned int lMII, unsigned int lMIII, unsigned int dlSym):
-	dlugoscSymulacji(dlSym), czasSymulacji(0){
-
-	this->pracownicy = std::vector<Pracownik>();
-	//todo trzeba dodać odpowiednie maszyny
-	this->maszyny = std::vector<Maszyna>();
-	this->zlecenia = std::list<Zlecenie>();
-
-}
-
-//nagłówki rozpatrywane przez koordynatora
 
 
 void Koordynator::poczatekWyjsciaZlecenia(){
@@ -218,5 +247,4 @@ void Koordynator::symuluj(unsigned int n){
 		if(this->czasSymulacji == this->dlugoscSymulacji) break;
 	}
 
-}
 */
