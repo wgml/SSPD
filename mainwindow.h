@@ -26,7 +26,7 @@ private:
 
     QCustomPlot * plotWorkers, *plotStorage, *plotMachines, *plotOrders;
 
-    QVector<unsigned> dataWorkers, dataStorage, dataMachines, dataOrders, dataTime;
+    QVector<double> dataWorkers, dataStorage1, dataStorage2, dataMachines1,dataMachines2,dataMachines3, dataOrders1, dataOrders2, dataTime;
     void init(); //tworzy obiekt symulacji
     void updateUI(); //aktualizuje wykresy i boxy
 
