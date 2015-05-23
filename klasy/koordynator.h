@@ -9,7 +9,6 @@
 #define KLASY_KOORDYNATOR_H_
 
 #include <iostream>
-#include <vector>
 #include <list>
 
 #include "zlecenie.h"
@@ -61,6 +60,8 @@ class Koordynator{
 
 		void set(Parameter, unsigned);
 		unsigned get(Parameter);
+
+		friend std::ostream& operator<<(std::ostream&, const Koordynator&);
 
 	private:
 		//nagłówki rozpatrywane przez koordynatora
