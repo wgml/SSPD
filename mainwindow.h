@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "dummy.h"
+#include "klasy/koordynator.h"
+#include "qcustomplot/qcustomplot.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,18 +17,20 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
-
 private:
     Ui::MainWindow *ui;
 
     QTimer * timer;
 
-    Dummy * master;
+    Koordynator * master;
 
+    QCustomPlot * plotWorkers, *plotStorage, *plotMachines, *plotOrders;
+
+    QVector<unsigned> dataWorkers, dataStorage, dataMachines, dataOrders, dataTime;
     void init(); //tworzy obiekt symulacji
     void updateUI(); //aktualizuje wykresy i boxy
 
+    void updatePlots(); //aktualizuje widoczne ploty
 
 private slots:
 
@@ -37,6 +40,11 @@ private slots:
     void tick(); //symuluje jedna iteracje
 
     void updateOrderDetais();
+
+    void on_plotWorkersButton_clicked();
+    void on_plotStorageButton_clicked();
+    void on_plotMachinesButton_clicked();
+    void on_plotOrdersButton_clicked();
 };
 
 #endif // MAINWINDOW_H
