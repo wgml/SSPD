@@ -91,7 +91,7 @@ void Koordynator::koniecWyjsciaZlecenia(){
 	std::list<Zlecenie> temp;
 
 	//weź zrealizowane zlecenia
-	std::copy_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(), temp.begin(), [](Zlecenie z){
+	std::copy_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(), temp.begin(), [&](Zlecenie z){
 		return (Koordynator::LSzM >= z.zapotrzebowanieSzafy()) && (Koordynator::LKM >= z.zapotrzebowanieKrzesla());});
 
 	if(!temp.empty()){

@@ -9,26 +9,18 @@
 #include "zlecenie.h"
 
 unsigned int Zlecenie::id = 1;
-unsigned int Zlecenie::lz = 0;
 
 Zlecenie::Zlecenie():Nr(Zlecenie::id), CzP(0), CzW(0), ZAKs(0), ZAK(0){
 	Zlecenie::id++;
-	Zlecenie::lz++;
 }
 
-Zlecenie::Zlecenie(unsigned krzesla, unsigned szafy, unsigned przybycie, unsigned wyjscie=0):
+Zlecenie::Zlecenie(unsigned krzesla, unsigned szafy, unsigned przybycie, unsigned wyjscie):
 	Nr(Zlecenie::id), CzP(przybycie), CzW(wyjscie), ZAK(krzesla),  ZAKs(szafy){
 	Zlecenie::id++;
-	Zlecenie::lz++;
 }
 
-Zlecenie::Zlecenie(const Zlecenie& z):Nr(z.Nr), CzP(z.CzP), CzW(z.CzW), ZAKs(z.ZAKs), ZAK(z.ZAK){
-	Zlecenie::lz++;
-}
+Zlecenie::Zlecenie(const Zlecenie& z):Nr(z.Nr), CzP(z.CzP), CzW(z.CzW), ZAKs(z.ZAKs), ZAK(z.ZAK){}
 
-Zlecenie::~Zlecenie(){
-	Zlecenie::lz--;
-}
 
 Zlecenie& Zlecenie::operator=(const Zlecenie & z){
 	this->Nr = z.Nr;

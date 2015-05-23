@@ -15,7 +15,6 @@ class Zlecenie{
 		Zlecenie();
 		Zlecenie(unsigned krzesla, unsigned szafy, unsigned przybycie, unsigned wyjscie=0);
 		Zlecenie(const Zlecenie&);
-		~Zlecenie();
 		Zlecenie& operator=(const Zlecenie &);
 		friend std::ostream& operator<<(std::ostream&, const Zlecenie&);
 		bool operator<(const Zlecenie&);
