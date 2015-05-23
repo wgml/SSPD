@@ -221,30 +221,135 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 	}
 }
 
-unsigned int Koordynator::get(Parameter p) {
-    switch(p) {
-    case Parameter::PrSz:           return PrSz1;
-    case Parameter::PrSz2:          return PrSz2;
-    case Parameter::PrK:            return PrK;
-    case Parameter::LSzM:           return LSzM;
-    case Parameter::LKM:            return LKM;
-    case Parameter::KSz:            return KSz;
-    case Parameter::KK:             return KK;
-    case Parameter::i:              return i;
-    case Parameter::j:              return j;
-    case Parameter::LWP:            return LWP;
-    case Parameter::ZASz:           return ZASz;
-    case Parameter::ZAK:            return ZAK;
-    case Parameter::LWM1:           return LWM1;
-    case Parameter::LWM2:           return LWM2;
-    case Parameter::LWM3:           return LWM3;
-    case Parameter::lPracownikow:   return LP;
-    case Parameter::lMaszyn1:       return LM1;
-    case Parameter::lMaszyn2:       return LM2;
-    case Parameter::lMaszyn3:       return LM3;
-    case Parameter::aktualnyCzas:   return aktualnyCzas;
-    default: return 0;
-    }
+void Koordynator::set(Parameter param, unsigned val){
+	switch(param){
+		case Parameter::PrSz:
+			this->PrSz1 = val;
+			break;
+		case Parameter::PrSz2:
+			this->PrSz2 = val;
+			break;
+		case Parameter::PrK:
+			this->PrK = val;
+			break;
+		case Parameter::LSzM:
+			this->LSzM = val;
+			break;
+		case Parameter::LKM:
+			this->LKM = val;
+			break;
+		case Parameter::KSz:
+			this->KSz = val;
+			break;
+		case Parameter::KK:
+			this->KK = val;
+			break;
+		case Parameter::i:
+			this->i = val;
+			break;
+		case Parameter::j:
+			this->j = val;
+			break;
+		case Parameter::LWP:
+			this->LWP = val;
+			break;
+		case Parameter::ZASz:
+			this->ZASz = val;
+			break;
+		case Parameter::ZAK:
+			this->ZAK = val;
+			break;
+		case Parameter::LWM1:
+			this->LWM1 = val;
+			break;
+		case Parameter::LWM2:
+			this->LWM2 = val;
+			break;
+		case Parameter::LWM3:
+			this->LWM3 = val;
+			break;
+		case Parameter::lPracownikow:
+			this->LP = val;
+			break;
+		case Parameter::lMaszyn1:
+			this->LM1 = val;
+			break;
+		case Parameter::lMaszyn2:
+			this->LM2 = val;
+			break;
+		case Parameter::lMaszyn3:
+			this->LM3 = val;
+			break;
+		case Parameter::aktualnyCzas:
+			this->aktualnyCzas = val;
+			break;
+	}
 }
+
+unsigned Koordynator::get(Parameter param){
+	switch(param){
+		case Parameter::PrSz:
+			return this->PrSz1;
+			break;
+		case Parameter::PrSz2:
+			return this->PrSz2;
+			break;
+		case Parameter::PrK:
+			return this->PrK;
+			break;
+		case Parameter::LSzM:
+			return this->LSzM;
+			break;
+		case Parameter::LKM:
+			return this->LKM;
+			break;
+		case Parameter::KSz:
+			return this->KSz;
+			break;
+		case Parameter::KK:
+			return this->KK;
+			break;
+		case Parameter::i:
+			return this->i;
+			break;
+		case Parameter::j:
+			return this->j;
+			break;
+		case Parameter::LWP:
+			return this->LWP;
+			break;
+		case Parameter::ZASz:
+			return this->ZASz;
+			break;
+		case Parameter::ZAK:
+			return this->ZAK;
+			break;
+		case Parameter::LWM1:
+			return this->LWM1;
+			break;
+		case Parameter::LWM2:
+			return this->LWM2;
+			break;
+		case Parameter::LWM3:
+			return this->LWM3;
+			break;
+		case Parameter::lPracownikow:
+			return this->LP;
+			break;
+		case Parameter::lMaszyn1:
+			return this->LM1;
+			break;
+		case Parameter::lMaszyn2:
+			return this->LM2;
+			break;
+		case Parameter::lMaszyn3:
+			return this->LM3;
+			break;
+		case Parameter::aktualnyCzas:
+			return this->aktualnyCzas;
+			break;
+	}
+}
+
 
 

@@ -59,11 +59,11 @@ class Koordynator{
 		 */
 		void sim(unsigned n);
 
-        void set(Parameter p , unsigned v) {}
-        unsigned int get(Parameter p);
-        unsigned int getOrderChairs(unsigned orderID) { return orderID; }
-        unsigned int getOrderWardrobes(unsigned orderID) { return orderID; }
-        unsigned int getOrderTime(unsigned orderID) { return orderID; }
+		void set(Parameter, unsigned);
+		unsigned get(Parameter);
+        int getOrderTime(int i) { return i;}
+        int getOrderWardrobes(int i) { return i;}
+        int getOrderChairs(int i) { return i;}
 
 	private:
 		//nagłówki rozpatrywane przez koordynatora
