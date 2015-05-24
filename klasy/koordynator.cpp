@@ -220,9 +220,9 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 }
 
 unsigned Koordynator::getOrderChairs(unsigned orderID){
-	s1 = this->zleceniaOczekujace.size();
-	s2 = this->zleceniaPrzybywajace.size();
-	s3 = this->zleceniaZrealizowane.size();
+	unsigned s1 = this->zleceniaOczekujace.size();
+	unsigned s2 = this->zleceniaPrzybywajace.size();
+	unsigned s3 = this->zleceniaZrealizowane.size();
 	s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
@@ -257,9 +257,9 @@ unsigned Koordynator::getOrderChairs(unsigned orderID){
 }
 
 unsigned Koordynator::getOrderWardrobes(unsigned orderID){
-	s1 = this->zleceniaOczekujace.size();
-	s2 = this->zleceniaPrzybywajace.size();
-	s3 = this->zleceniaZrealizowane.size();
+	unsigned s1 = this->zleceniaOczekujace.size();
+	unsigned s2 = this->zleceniaPrzybywajace.size();
+	unsigned s3 = this->zleceniaZrealizowane.size();
 	s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
@@ -294,9 +294,9 @@ unsigned Koordynator::getOrderWardrobes(unsigned orderID){
 }
 
 unsigned Koordynator::getOrderTime(unsigned orderID){
-	s1 = this->zleceniaOczekujace.size();
-	s2 = this->zleceniaPrzybywajace.size();
-	s3 = this->zleceniaZrealizowane.size();
+	unsigned s1 = this->zleceniaOczekujace.size();
+	unsigned s2 = this->zleceniaPrzybywajace.size();
+	unsigned s3 = this->zleceniaZrealizowane.size();
 	s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
