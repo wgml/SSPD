@@ -1,18 +1,11 @@
-/*
- * main.cpp
- *
- *  Created on: 21 maj 2015
- *      Author: rafal
- */
+#include "mainwindow.h"
+#include <QApplication>
 
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-#include <iostream>
-
-int main(){
-
-	std::cout << "hello world! \n";
-
-	return 0;
+    return a.exec();
 }
-
-

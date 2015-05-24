@@ -61,6 +61,10 @@ class Koordynator{
 		void set(Parameter, unsigned);
 		unsigned get(Parameter);
 
+        unsigned getOrderChairs(unsigned id) { return id;} //todo!
+        unsigned getOrderWardrobes(unsigned id) { return id;}
+        unsigned getOrderTime(unsigned id) { return id;}
+
 		friend std::ostream& operator<<(std::ostream&, const Koordynator&);
 
 		//listy ze zleceniami
