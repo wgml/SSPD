@@ -223,7 +223,7 @@ unsigned Koordynator::getOrderChairs(unsigned orderID){
 	unsigned s1 = this->zleceniaOczekujace.size();
 	unsigned s2 = this->zleceniaPrzybywajace.size();
 	unsigned s3 = this->zleceniaZrealizowane.size();
-	s = s1 + s2 + s3;
+	unsigned s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
 
@@ -260,7 +260,7 @@ unsigned Koordynator::getOrderWardrobes(unsigned orderID){
 	unsigned s1 = this->zleceniaOczekujace.size();
 	unsigned s2 = this->zleceniaPrzybywajace.size();
 	unsigned s3 = this->zleceniaZrealizowane.size();
-	s = s1 + s2 + s3;
+	unsigned s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
 
@@ -297,7 +297,7 @@ unsigned Koordynator::getOrderTime(unsigned orderID){
 	unsigned s1 = this->zleceniaOczekujace.size();
 	unsigned s2 = this->zleceniaPrzybywajace.size();
 	unsigned s3 = this->zleceniaZrealizowane.size();
-	s = s1 + s2 + s3;
+	unsigned s = s1 + s2 + s3;
 
 	if(orderID > s) return 0;
 
