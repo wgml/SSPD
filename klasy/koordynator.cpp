@@ -48,7 +48,7 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 	std::uniform_int_distribution<unsigned> genKrzesel(this->krzeslaD, this->krzeslaG);
 	std::uniform_int_distribution<unsigned> genSzaf(this->szafyD, this->szafyG);
 
-	while(this->aktualnyCzas >= this->dlugoscSymulacji){
+	while(this->aktualnyCzas <= this->dlugoscSymulacji){
 		unsigned nowyCzas 	 = genCzasu(generator);
 		unsigned noweKrzesla = genKrzesel(generator);
 		unsigned noweSzafy	 = genSzaf(generator);
@@ -82,6 +82,8 @@ void Koordynator::sim(unsigned n){
 		this->poczatekRealizacji();
 		this->przybycieZlecenia();
 
+		std::cerr << *this << std::endl;
+
 		if(this->aktualnyCzas >= this->dlugoscSymulacji) break;
 	}
 }
@@ -112,6 +114,7 @@ void Koordynator::poczatekWyjsciaZlecenia(){
 	if(it != this->zleceniaOczekujace.end()){
 		Koordynator::LSzM -= it->zapotrzebowanieSzafy();
 		Koordynator::LKM  -= it->zapotrzebowanieKrzesla();
+		this->zleceniaZrealizowane.push_back(*it);
 		this->zleceniaOczekujace.remove(*it);
 		Koordynator::i++;
 	}
@@ -348,8 +351,32 @@ unsigned Koordynator::get(Parameter param){
 		case Parameter::aktualnyCzas:
 			return this->aktualnyCzas;
 			break;
-	}
+		default:
+			return 0;
+			break;
+	};
 }
 
-
-
+std::ostream& operator<<(std::ostream &output, const Koordynator& koor){
+	output << " Liczba przetworzonych na maszynie I szaf " << koor.PrSz1 << std::endl;
+	output << " Liczba przetworzonych na maszynie II szaf " << koor.PrSz2 << std::endl;
+	output << " Liczba przetworzonych na maszynie I krzeseł " << koor.PrK << std::endl;
+	output << " Liczba Szaf w magazynie (gotowych) " << koor.LSzM << std::endl;
+	output << " Liczba krzeseł w magazynie (gotowych) " << koor.LKM << std::endl;
+	output << " Liczba szaf czekających w kolejce na rozpoczęcie obróbki " << koor.KSz << std::endl;
+	output << " Liczba krzeseł oczekujących w kolejce na rozpoczęcie obróbki " << koor.KK << std::endl;
+	output << " Liczba zrealizowanych zamówień " << koor.i << std::endl;
+	output << " Liczba zamówień, które przybyły do systemu " << koor.j << std::endl;
+	output << " Liczba wolnych pracowników " << koor.LWP << std::endl;
+	output << " Zapotrzebowanie na szafy " << koor.ZASz << std::endl;
+	output << " Zapotrzebowanie na krzesła " << koor.ZAK << std::endl;
+	output << " Liczba wolnych maszyn I " << koor.LWM1 << std::endl;
+	output << " Liczba wolnych maszyn II " << koor.LWM2 << std::endl;
+	output << " Liczba wolnych maszyn III " << koor.LWM3 << std::endl;
+	output << " Liczba pracowników" << koor.LP << std::endl;
+	output << " Liczba maszyn 1 " << koor.LM1 << std::endl;
+	output << " Liczba maszyn 2 " << koor.LM2 << std::endl;
+	output << " Liczba maszyn 3 " << koor.LM3 << std::endl;
+	output << " Czas " << koor.aktualnyCzas << std::endl;
+	return output;
+}
