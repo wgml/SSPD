@@ -219,6 +219,117 @@ void Koordynator::poczatekObrobkiKrzeselMaszynaI(){
 	}
 }
 
+unsigned Koordynator::getOrderChairs(unsigned orderID){
+	s1 = this->zleceniaOczekujace.size();
+	s2 = this->zleceniaPrzybywajace.size();
+	s3 = this->zleceniaZrealizowane.size();
+	s = s1 + s2 + s3;
+
+	if(orderID > s) return 0;
+
+	auto itPrzyb = std::find_if(this->zleceniaPrzybywajace.begin(), this->zleceniaPrzybywajace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itPrzyb != this->zleceniaPrzybywajace.end()){
+		return itPrzyb->zapotrzebowanieKrzesla();
+	}
+
+	auto itOczek = std::find_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itOczek != this->zleceniaOczekujace.end()){
+			return itOczek->zapotrzebowanieKrzesla();
+	}
+
+	auto itZreal = std::find_if(this->zleceniaZrealizowane.begin(), this->zleceniaZrealizowane.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itZreal != this->zleceniaZrealizowane.end()){
+			return itZreal->zapotrzebowanieKrzesla();
+	}
+
+}
+
+unsigned Koordynator::getOrderWardrobes(unsigned orderID){
+	s1 = this->zleceniaOczekujace.size();
+	s2 = this->zleceniaPrzybywajace.size();
+	s3 = this->zleceniaZrealizowane.size();
+	s = s1 + s2 + s3;
+
+	if(orderID > s) return 0;
+
+	auto itPrzyb = std::find_if(this->zleceniaPrzybywajace.begin(), this->zleceniaPrzybywajace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itPrzyb != this->zleceniaPrzybywajace.end()){
+		return itPrzyb->zapotrzebowanieSzafy();
+	}
+
+	auto itOczek = std::find_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itOczek != this->zleceniaOczekujace.end()){
+			return itOczek->zapotrzebowanieSzafy();
+	}
+
+	auto itZreal = std::find_if(this->zleceniaZrealizowane.begin(), this->zleceniaZrealizowane.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itZreal != this->zleceniaZrealizowane.end()){
+			return itZreal->zapotrzebowanieSzafy();
+	}
+
+}
+
+unsigned Koordynator::getOrderTime(unsigned orderID){
+	s1 = this->zleceniaOczekujace.size();
+	s2 = this->zleceniaPrzybywajace.size();
+	s3 = this->zleceniaZrealizowane.size();
+	s = s1 + s2 + s3;
+
+	if(orderID > s) return 0;
+
+	auto itPrzyb = std::find_if(this->zleceniaPrzybywajace.begin(), this->zleceniaPrzybywajace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itPrzyb != this->zleceniaPrzybywajace.end()){
+		return itPrzyb->czasPrzybycia();
+	}
+
+	auto itOczek = std::find_if(this->zleceniaOczekujace.begin(), this->zleceniaOczekujace.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itOczek != this->zleceniaOczekujace.end()){
+			return itOczek->czasPrzybycia();
+	}
+
+	auto itZreal = std::find_if(this->zleceniaZrealizowane.begin(), this->zleceniaZrealizowane.end(),
+	[&](Zlecenie z){
+		return z.nrZlecenia() == orderID;
+	});
+
+	if(itZreal != this->zleceniaZrealizowane.end()){
+			return itZreal->czasPrzybycia();
+	}
+
+}
+
 void Koordynator::set(Parameter param, unsigned val){
 	switch(param){
 		case Parameter::PrSz:

@@ -67,10 +67,10 @@ class Koordynator{
 
 		friend std::ostream& operator<<(std::ostream&, const Koordynator&);
 
-		//listy ze zleceniami
-		std::list<Zlecenie> zleceniaPrzybywajace;
-		std::list<Zlecenie> zleceniaOczekujace;
-		std::list<Zlecenie> zleceniaZrealizowane;
+	    unsigned getOrderChairs(unsigned orderID);
+	    unsigned getOrderWardrobes(unsigned orderID);
+	    unsigned getOrderTime(unsigned orderID);
+
 
 	private:
 		//nagłówki rozpatrywane przez koordynatora
@@ -131,7 +131,10 @@ class Koordynator{
 		const unsigned szafyD = 0;
 		const unsigned szafyG = 5;
 
-
+		//listy ze zleceniami
+		std::list<Zlecenie> zleceniaPrzybywajace;
+		std::list<Zlecenie> zleceniaOczekujace;
+		std::list<Zlecenie> zleceniaZrealizowane;
 
 		//czasy końca obórki szaf na maszynach
 		std::list<unsigned> szafyKoniecM3;
