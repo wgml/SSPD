@@ -53,7 +53,10 @@
         <item>
          <widget class="QLabel" name="label_29">
           <property name="text">
-           <string>TUTAJ MOŻNA DAĆ JAKIŚ KRÓTKI OPIS CO KLIKAĆ, BO ZOSTAŁO MI NIECO MIEJSCA</string>
+           <string>Aby rozpocząć symulację, należy najpierw upenić się, że wartości parametrów są odpowiednio ustalone. Następnie wystarczy kliknąć Symuluj. W trakcie symulacji warto sprawdzić zachowanie systemu w czasie na dostępnych wykresach. </string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignJustify|Qt::AlignVCenter</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
