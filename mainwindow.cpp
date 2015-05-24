@@ -45,7 +45,6 @@ void MainWindow::on_simButton_clicked() {
         this->ui->numMachines1->setEnabled(false);
         this->ui->numMachines2->setEnabled(false);
         this->ui->numMachines3->setEnabled(false);
-        this->ui->tasksFreq->setEnabled(false);
         this->ui->simStepSpin->setEnabled(false);
         this->ui->resetButton->setEnabled(false);
 
@@ -60,7 +59,6 @@ void MainWindow::on_resetButton_clicked() {
     this->ui->numMachines1->setEnabled(true);
     this->ui->numMachines2->setEnabled(true);
     this->ui->numMachines3->setEnabled(true);
-    this->ui->tasksFreq->setEnabled(true);
     this->ui->simStepSpin->setEnabled(true);
     this->ui->resetButton->setEnabled(true);
 
@@ -69,7 +67,7 @@ void MainWindow::on_resetButton_clicked() {
         this->master = NULL;
     }
 
-    this->ui->ordersComboBox->clear();
+    //this->ui->ordersComboBox->clear();
 
     this->ui->employeesFree->setText(QString::null);
     this->ui->employeeBusy->setText(QString::null);
@@ -116,15 +114,21 @@ void MainWindow::on_resetButton_clicked() {
         this->plotStorage = NULL;
     }
 
-    this->dataMachines1.clear();
-    this->dataMachines2.clear();
-    this->dataMachines3.clear();
-    this->dataOrders1.clear();
-    this->dataOrders2.clear();
-    this->dataStorage1.clear();
-    this->dataStorage2.clear();
-    this->dataWorkers.clear();
-    this->dataTime.clear();
+    this->dataMachines1.resize(0);
+    this->dataMachines2.resize(0);
+    this->dataMachines3.resize(0);
+    this->dataOrders1.resize(0);
+    this->dataOrders2.resize(0);
+    this->dataStorage1.resize(0);
+    this->dataStorage2.resize(0);
+    this->dataWorkers.resize(0);
+    this->dataTime.resize(0);
+
+    this->ui->plotMachinesButton->setEnabled(false);
+    this->ui->plotOrdersButton->setEnabled(false);
+    this->ui->plotStorageButton->setEnabled(false);
+    this->ui->plotWorkersButton->setEnabled(false);
+
 }
 
 void MainWindow::tick() {
@@ -189,6 +193,11 @@ void MainWindow::init() {
     dlSym = 1000;
 
     this->master = new Koordynator(lp, lm1, lm2, lm3, dlSym);
+
+    this->ui->plotMachinesButton->setEnabled(true);
+    this->ui->plotOrdersButton->setEnabled(true);
+    this->ui->plotStorageButton->setEnabled(true);
+    this->ui->plotWorkersButton->setEnabled(true);
 
 }
 
@@ -261,9 +270,11 @@ void MainWindow::on_plotWorkersButton_clicked() {
 
         this->plotWorkers->addGraph();
 
-        this->plotWorkers->graph(0)->setData(dataTime, dataWorkers);
+        if(this->dataTime.size() != 0)
+            this->plotWorkers->graph(0)->setData(dataTime, dataWorkers);
         this->plotWorkers->graph(0)->setPen(QPen(Qt::red));
-        this->plotWorkers->xAxis->setRange(0, dataTime.back());
+        if(this->dataTime.size() != 0)
+            this->plotWorkers->xAxis->setRange(0, dataTime.back());
         this->plotWorkers->yAxis->setRange(-1, this->master->get(Parameter::lPracownikow));
         this->plotWorkers->replot();
     }
@@ -282,15 +293,18 @@ void MainWindow::on_plotStorageButton_clicked() {
         this->plotStorage->addGraph();
         this->plotStorage->addGraph();
 
-        this->plotStorage->graph(0)->setData(dataTime, dataStorage1);
+        if(this->dataTime.size() != 0)
+            this->plotStorage->graph(0)->setData(dataTime, dataStorage1);
         this->plotStorage->graph(0)->setPen(QPen(Qt::red));
         this->plotStorage->graph(0)->setName("Krzesła");
 
-        this->plotStorage->graph(1)->setData(dataTime, dataStorage2);
+        if(this->dataTime.size() != 0)
+            this->plotStorage->graph(1)->setData(dataTime, dataStorage2);
         this->plotStorage->graph(1)->setPen(QPen(Qt::green));
         this->plotStorage->graph(1)->setName("Szafy");
 
-        this->plotStorage->xAxis->setRange(0, dataTime.back());
+        if(this->dataTime.size() != 0)
+            this->plotStorage->xAxis->setRange(0, dataTime.back());
         this->plotStorage->yAxis->setRange(-1, 20);
         this->plotStorage->legend->setVisible(true);
 
@@ -315,19 +329,23 @@ void MainWindow::on_plotMachinesButton_clicked() {
         this->plotMachines->addGraph();
         this->plotMachines->addGraph();
 
-        this->plotMachines->graph(0)->setData(dataTime, dataMachines1);
+        if(this->dataTime.size() != 0)
+            this->plotMachines->graph(0)->setData(dataTime, dataMachines1);
         this->plotMachines->graph(0)->setPen(QPen(Qt::red));
         this->plotMachines->graph(0)->setName("Maszyny typu I");
 
-        this->plotMachines->graph(1)->setData(dataTime, dataMachines2);
+        if(this->dataTime.size() != 0)
+            this->plotMachines->graph(1)->setData(dataTime, dataMachines2);
         this->plotMachines->graph(1)->setPen(QPen(Qt::green));
         this->plotMachines->graph(1)->setName("Maszyny typu II");
 
-        this->plotMachines->graph(2)->setData(dataTime, dataMachines3);
+        if(this->dataTime.size() != 0)
+            this->plotMachines->graph(2)->setData(dataTime, dataMachines3);
         this->plotMachines->graph(2)->setPen(QPen(Qt::blue));
         this->plotMachines->graph(2)->setName("Maszyny typu III");
 
-        this->plotMachines->xAxis->setRange(0, dataTime.back());
+        if(this->dataTime.size() != 0)
+            this->plotMachines->xAxis->setRange(0, dataTime.back());
         this->plotMachines->yAxis->setRange(-1, max + 1);
 
         this->plotMachines->legend->setVisible(true);
@@ -348,17 +366,19 @@ void MainWindow::on_plotOrdersButton_clicked() {
         this->plotOrders->addGraph();
         this->plotOrders->addGraph();
 
-        this->plotOrders->graph(0)->setData(dataTime, dataOrders1);
+        if(this->dataTime.size() != 0)
+            this->plotOrders->graph(0)->setData(dataTime, dataOrders1);
         this->plotOrders->graph(0)->setPen(QPen(Qt::red));
         this->plotOrders->graph(0)->setName("Aktualne zlecenie");
 
-
-        this->plotOrders->graph(1)->setData(dataTime, dataOrders2);
+        if(this->dataTime.size() != 0)
+            this->plotOrders->graph(1)->setData(dataTime, dataOrders2);
         this->plotOrders->graph(1)->setPen(QPen(Qt::green));
         this->plotOrders->graph(1)->setName("Wszystkie zlecenia");
 
 
-        this->plotOrders->xAxis->setRange(0, dataTime.back());
+        if(this->dataTime.size() != 0)
+            this->plotOrders->xAxis->setRange(0, dataTime.back());
         this->plotOrders->yAxis->setRange(-1, this->master->get(Parameter::j) + 1);
         this->plotOrders->legend->setVisible(true);
 

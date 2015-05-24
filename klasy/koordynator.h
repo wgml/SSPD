@@ -63,7 +63,6 @@ class Koordynator{
         unsigned getOrderChairs(unsigned id) { return id;}
         unsigned getOrderWardrobes(unsigned id) { return id;}
         unsigned getOrderTime(unsigned id) { return id;}
-
 		friend std::ostream& operator<<(std::ostream&, const Koordynator&);
 
 	private:
@@ -111,11 +110,11 @@ class Koordynator{
 		 * Czasy obsługi na maszynach
 		 * todo narazie będą stałymi, kiedyś odjebie się losowanko
 		 * */
-		const unsigned czasObrobkiSzafyMaszyna3 = 30;
-		const unsigned czasObrobkiSzafyMaszyna2 = 5;
-		const unsigned czasObrobkiSzafyMaszyna1 = 15;
-		const unsigned czasObrobkiKrzeslaMaszyna2 = 10;
-		const unsigned czasObrobkiKrzeslaMaszyna1 = 20;
+		const unsigned czasObrobkiSzafyMaszyna3 = 10;
+		const unsigned czasObrobkiSzafyMaszyna2 = 3;
+		const unsigned czasObrobkiSzafyMaszyna1 = 5;
+		const unsigned czasObrobkiKrzeslaMaszyna2 = 5;
+		const unsigned czasObrobkiKrzeslaMaszyna1 = 2;
 
 		//zakresy dla generatora
 		const unsigned czasD = 10;
