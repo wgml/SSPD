@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Symulacja zawsze spoko</string>
+   <string>Symulacja</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_6">
@@ -1017,7 +1017,7 @@
      <x>0</x>
      <y>0</y>
      <width>740</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
