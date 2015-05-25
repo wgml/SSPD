@@ -8,7 +8,7 @@
 
 #include "zlecenie.h"
 
-unsigned int Zlecenie::id = 1;
+unsigned int Zlecenie::id = 0;
 
 Zlecenie::Zlecenie():Nr(Zlecenie::id), CzP(0), CzW(0), ZAKs(0), ZAK(0){
 	Zlecenie::id++;
