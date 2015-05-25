@@ -169,6 +169,8 @@ void MainWindow::updatePlots() {
         this->plotOrders->xAxis->setRange(0, dataTime.back());
         this->plotOrders->graph(0)->setData(dataTime, dataOrders1);
         this->plotOrders->graph(1)->setData(dataTime, dataOrders2);
+        this->plotOrders->yAxis->setRange(-1, this->master->get(Parameter::j) + 1);
+
         this->plotOrders->replot();
     }
     if(this->plotMachines != NULL && this->plotMachines->isVisible()) {
