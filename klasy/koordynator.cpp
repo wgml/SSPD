@@ -8,6 +8,7 @@
 #include "koordynator.h"
 #include <algorithm>
 #include <random>
+#include <ctime>
 
 Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, unsigned int dlSym){
 
@@ -42,7 +43,8 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 	std::list<unsigned> szafyKoniecM1 = std::list<unsigned>();
 
 	//losowanie czasów nowych zleceń
-	std::default_random_engine generator;
+
+	std::default_random_engine generator(time(NULL));
 	std::uniform_int_distribution<unsigned> genCzasu(this->czasD, this->czasG);
 	std::uniform_int_distribution<unsigned> genKrzesel(this->krzeslaD, this->krzeslaG);
 	std::uniform_int_distribution<unsigned> genSzaf(this->szafyD, this->szafyG);
@@ -51,6 +53,12 @@ Koordynator::Koordynator(unsigned lP, unsigned lM1, unsigned lM2, unsigned lM3, 
 		unsigned nowyCzas 	 = genCzasu(generator);
 		unsigned noweKrzesla = genKrzesel(generator);
 		unsigned noweSzafy	 = genSzaf(generator);
+
+		//zabezpieczenie przed dodawaniem "pustych zleceń"
+		while((noweKrzesla == 0) && (noweSzafy == 0)){
+            noweKrzesla = genKrzesel(generator);
+            noweSzafy	 = genSzaf(generator);
+		}
 
 		this->aktualnyCzas += nowyCzas;
 
