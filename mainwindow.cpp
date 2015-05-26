@@ -16,8 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()),
             this, SLOT(tick()));
 
-    connect(this->ui->ordersComboBox, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(updateOrderDetais()));
+    connect(this->ui->ordersComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(updateOrderDetais()));
 }
 
 MainWindow::~MainWindow()
@@ -66,8 +65,7 @@ void MainWindow::on_resetButton_clicked() {
         delete this->master;
         this->master = NULL;
     }
-
-    //this->ui->ordersComboBox->clear();
+    this->ui->ordersComboBox->clear();
 
     this->ui->employeesFree->setText(QString::null);
     this->ui->employeeBusy->setText(QString::null);
@@ -238,8 +236,12 @@ void MainWindow::updateUI() {
 }
 
 void MainWindow::updateOrderDetais() {
+
+    if(this->ui->ordersComboBox->count() == 0) return;
+
     int time, chairs, wardrobes, id;
     id = this->ui->ordersComboBox->currentIndex();
+    printf("%d", id);
     chairs = this->master->getOrderChairs(id);
     wardrobes = this->master->getOrderWardrobes(id);
     time = this->master->getOrderTime(id);
